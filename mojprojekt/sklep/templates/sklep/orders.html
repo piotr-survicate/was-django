@@ -1,0 +1,13 @@
+{% extends "sklep/base.html" %}
+{% block title %} Orders list {% endblock %}
+{% block content %}
+    <p><a href={% url 'index' %}>Go back</a></p>
+    <h1>Welcome to my shop!</h1>
+    <h2>All orders</h2>
+    <ul>
+        {% for order in orders %}
+        <li>
+            <h3>{{ order.name }}</h3>
+        </li>
+    {% endfor %}</ul>
+{% endblock %}

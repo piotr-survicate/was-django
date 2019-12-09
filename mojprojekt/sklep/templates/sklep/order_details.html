@@ -1,0 +1,7 @@
+{% extends "sklep/base.html" %}
+{% block title %} Produkt {% endblock %}
+{% block content %}
+<p><a href={% url 'orders' %}>Go back</a></p>
+    <h2>{{ order.name }}</h2>
+    <p>{{ order.get_total_price }}</p>
+{% endblock %}
