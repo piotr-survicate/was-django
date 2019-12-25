@@ -1,20 +1,8 @@
-from pyclbr import Class
-
-from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
-from .models import Product
-from .models import Order
 from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
+
 from .forms import OrderForm, ComplaintForm
-from .models import Complaint
-
-
-# Create your views here.
-
-def index(request, imie):
-    return render(request, "sklep/glowna.html", {
-        "imie_klienta": imie
-    })
+from .models import Product, Order, OrderedProduct, Complaint
 
 
 def product_list(request):
@@ -23,43 +11,31 @@ def product_list(request):
 
     return render(
         request,
-        "sklep/products.html",
-        context)
+        "sklep/list.html",
+        context
+    )
 
 
-def order_list(request):
-    orders = Order.objects.order_by('id')
-    context = {'orders': orders}
-
-    return render(
-        request,
-        "sklep/orders.html",
-        context)
-
-
-def product(request, product_id):
+def product_details(request, product_id):
     product = Product.objects.get(id=product_id)
-    context = {'product': product}
-
+    context = {"product": product}
     return render(
         request,
-        "sklep/product.html",
-        context)
+        "sklep/details.html",
+        context
+    )
 
 
 def index(request):
     return render(
         request,
-        "sklep/index.html")
-
-
-def order_details(request, order_id):
-    order = get_object_or_404(Order, pk=order_id)
-    context = {'order': order}
-    return render(request, "sklep/order_details.html", context)
+        "sklep/index.html"
+    )
 
 
 def order(request):
+    products_to_order = _get_products_in_cart(request)
+
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
@@ -69,31 +45,69 @@ def order(request):
                 delivery=form.cleaned_data['delivery']
             )
             order.save()
-            return HttpResponseRedirect('/order/' + str(order.id))
+
+            # Dodajemy wszystkie produkty z koszyka do zamowienia
+            for product in products_to_order:
+                OrderedProduct(
+                    product=product,
+                    order=order,
+                    amount=1
+                ).save()
+
+            request.session['cart'] = []    # Czyscimy koszyk
+
+            return HttpResponseRedirect('/order/'+str(order.id))
     else:
         form = OrderForm()
 
-    return render(request, "sklep/order_form.html", {"form": form})
+    return render(request, "sklep/order_form.html", {"form": form, "products": products_to_order})
+
+
+def order_details(request, order_id):
+    order = get_object_or_404(Order, pk=order_id)
+    total_price = order.get_total_price()
+
+    ordered_products = OrderedProduct.objects.filter(order=order)
+
+    return render(request, "sklep/order_details.html",
+                  {"total_price": total_price, "ordered_products": ordered_products})
 
 
 def complaint(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = ComplaintForm(request.POST)
         if form.is_valid():
-            complaint = Complaint(
-                name=form.cleaned_data['name'],
-                message=form.cleaned_data['message']
-            )
+            complaint = Complaint(name=form.cleaned_data['name'], message=form.cleaned_data['message'])
             complaint.save()
-            return HttpResponseRedirect('/complaint/' + str(complaint.id))
+            return HttpResponseRedirect('/complaint/'+str(complaint.id))
     else:
         form = ComplaintForm()
-
     return render(request, "sklep/complaint_form.html", {"form": form})
 
 
 def complaint_details(request, complaint_id):
     complaint = get_object_or_404(Complaint, pk=complaint_id)
-    context = {'complaint': complaint}
+    return render(request, "sklep/complaint_details.html", {"complaint": complaint})
 
-    return render(request, "sklep/complaint_details.html", context)
+
+def add_to_cart(request):
+    if request.method == "POST":
+        if 'cart' not in request.session:
+            request.session['cart'] = []
+        request.session['cart'].append(request.POST['item_id'])
+        request.session.modified = True
+
+    return HttpResponseRedirect('/cart')
+
+
+def _get_products_in_cart(request):
+    products_in_cart = []
+    for item_id in request.session.get('cart', []):
+        product = Product.objects.get(pk=item_id)
+        products_in_cart.append(product)
+    return products_in_cart
+
+
+def cart(request):
+    products_in_cart = _get_products_in_cart(request)
+    return render(request, "sklep/cart.html", {"products": products_in_cart})

@@ -1,6 +1,6 @@
-{% extends "sklep/base.html" %}
-{% block title %} Produkt {% endblock %}
+{% extends "base.html" %}
+{% block title %}Szczegóły reklamacji{% endblock %}
 {% block content %}
-    <h2>{{ complaint.name }}</h2>
-    <p>{{ complaint.message }}</p>
+<h1>Reklamacja od: {{ complaint.name }}</h1>
+<p>{{ complaint.message }}</p>
 {% endblock %}

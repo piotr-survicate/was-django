@@ -1,9 +1,10 @@
-{% extends "sklep/base.html" %}
+{% extends "base.html" %}
 {% block content %}
-<h3>Złóż zamówienie</h3>
+<h3>Złóż reklamację</h3>
 <form action="/complaint/" method="post">
     {% csrf_token %}
     {{ form }}
-<input type="submit" value="Złóż reklamację">
+    <input type="submit" value="Złóż reklamację">
 </form>
+
 {% endblock %}

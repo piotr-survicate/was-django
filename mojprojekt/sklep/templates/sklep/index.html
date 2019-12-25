@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Index</title>
-</head>
-<body>
-<h3>Siemanko,</h3>
-<p>Witam w mojej kuchni</p>
-<p><a href={% url 'products' %}>Wyświetl produkty</a></p>
-<p><a href={% url 'orders' %}>Wyświetl zamówienia</a></p>
+{% extends 'base.html' %}
+{% block title %}Sklep W@S - Strona Główna (Handlowa){% endblock %}
+{% block content %}
+    <h1>Strona główna</h1>
+    <a href="/products/" >Przejdź do listy produków</a> <br>
+    <a href="/admin/" >Przejdź do panelu admina</a>
 
-</body>
-</html>
+{% endblock %}

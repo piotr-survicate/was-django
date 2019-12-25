@@ -1,6 +1,6 @@
 from django.forms import ModelForm
-from .models import Order
-from .models import Complaint
+
+from .models import Order, Complaint
 
 
 class OrderForm(ModelForm):

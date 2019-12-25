@@ -1,8 +1,0 @@
-{% extends "sklep/base.html" %}
-{% block title %} Produkt {% endblock %}
-{% block content %}
-    <h2>{{ product.name }}</h2>
-    <p>{{ product.type }} by {{ product.author }}</p>
-    <p><b>Price:</b> {{ product.price }}</p>
-    <a href={% url 'products' %}>Go back</a>
-{% endblock %}
