@@ -9,7 +9,6 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     price = models.FloatField(default=0)
     description = models.CharField(max_length=500, default='Brak Opisu')
-    weight = models.FloatField(default=0)
 
 
 class Order(models.Model):

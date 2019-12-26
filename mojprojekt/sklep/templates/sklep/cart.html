@@ -5,8 +5,14 @@
         <ul>
             {% for product in products %}
                 <li>{{ product.name }} ({{ product.price }})</li>
+                    <form action="/cart/delete/" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="item_id" value="{{product.id}}">
+                        <input type="submit" value="Usuń z koszyka">
+                    </form>
             {% endfor %}
         </ul>
+    <p>Wartość koszyka: {{total}}</p>
     {% else %}
         <p>Koszyk jest pusty</p>
     {% endif %}

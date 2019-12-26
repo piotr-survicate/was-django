@@ -100,6 +100,16 @@ def add_to_cart(request):
     return HttpResponseRedirect('/cart')
 
 
+def delete_from_cart(request):
+    if request.method == "POST":
+        if 'cart' not in request.session:
+            request.session['cart'] = []
+        request.session['cart'].remove(request.POST['item_id'])
+        request.session.modified = True
+
+    return HttpResponseRedirect('/cart')
+
+
 def _get_products_in_cart(request):
     products_in_cart = []
     for item_id in request.session.get('cart', []):
@@ -108,6 +118,15 @@ def _get_products_in_cart(request):
     return products_in_cart
 
 
+def _get_cart_value(request):
+    total = 0
+    for item_id in request.session.get('cart', []):
+        product = Product.objects.get(pk=item_id)
+        total += product.price
+    return total
+
+
 def cart(request):
     products_in_cart = _get_products_in_cart(request)
-    return render(request, "sklep/cart.html", {"products": products_in_cart})
+    total = _get_cart_value(request)
+    return render(request, "sklep/cart.html", {"products": products_in_cart, "total": total})

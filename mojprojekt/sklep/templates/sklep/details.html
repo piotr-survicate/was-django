@@ -9,9 +9,6 @@
     <li>
         <p>{{ product.description }}</p>
     </li>
-    <li>
-        <p>Waga: {{ product.weight }}</p>
-    </li>
   </ul>
   <form action="/cart/add/" method="post">
       {% csrf_token %}
