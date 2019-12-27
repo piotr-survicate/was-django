@@ -2,14 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98529666-8983-40c4-ba2a-739d7ad49770" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/mojprojekt/sklep/migrations/0005_remove_product_weight.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mojprojekt/sklep/migrations/0002_auto_20191226_2005.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mojprojekt/sklep/migrations/0003_product_author.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mojprojekt/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/mojprojekt/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mojprojekt/sklep/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/mojprojekt/sklep/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mojprojekt/sklep/migrations/0002_order.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mojprojekt/sklep/migrations/0003_ordered_products.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mojprojekt/sklep/migrations/0004_complaint.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mojprojekt/sklep/migrations/0005_remove_product_weight.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/mojprojekt/sklep/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mojprojekt/sklep/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mojprojekt/sklep/templates/sklep/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/mojprojekt/sklep/templates/sklep/cart.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mojprojekt/sklep/templates/sklep/details.html" beforeDir="false" afterPath="$PROJECT_DIR$/mojprojekt/sklep/templates/sklep/details.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mojprojekt/sklep/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mojprojekt/sklep/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mojprojekt/sklep/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mojprojekt/sklep/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,8 +41,9 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/mojprojekt/sklep/templates/sklep" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.project" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -112,5 +118,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/django-was-2019z" />
+      <path value="$PROJECT_DIR$/was-django" />
+    </ignored-roots>
   </component>
 </project>

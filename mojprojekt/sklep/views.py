@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
 from .forms import OrderForm, ComplaintForm
-from .models import Product, Order, OrderedProduct, Complaint
+from .models import Product, Order, OrderedProduct, Complaint, Opinion
 
 
 def product_list(request):
@@ -19,11 +19,35 @@ def product_list(request):
 def product_details(request, product_id):
     product = Product.objects.get(id=product_id)
     context = {"product": product}
+    opinions = opinions_list(request, product_id)
     return render(
         request,
         "sklep/details.html",
-        context
+        context,
+        opinions
     )
+
+
+def opinions_avg(request, product_id):
+    opinions = Opinion.objects.filter(product=product_id)
+
+    total = 0
+    amount = 0
+
+    for opinion in opinions:
+        total += opinion.value
+        amount += 1
+    if amount != 0:
+        average = total / amount
+        return average
+    else:
+        average = 0
+        return average
+
+
+def opinions_list(request, product_id):
+    opinions = Opinion.objects.filter(product=product_id)
+    return opinions
 
 
 def index(request):

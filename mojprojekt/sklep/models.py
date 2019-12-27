@@ -7,6 +7,7 @@ class Product(models.Model):
         return self.name
 
     name = models.CharField(max_length=100)
+    author = models.CharField(max_length=100, default='Author unknown')
     price = models.FloatField(default=0)
     description = models.CharField(max_length=500, default='Brak Opisu')
 
@@ -38,3 +39,9 @@ class OrderedProduct(models.Model):
 class Complaint(models.Model):
     name = models.CharField(max_length=64)
     message = models.CharField(max_length=255)
+
+
+class Opinion(models.Model):
+    value = models.IntegerField(range(1, 5))
+    message = models.CharField(max_length=400)
+    product = models.ForeignKey(Product, on_delete=models.PROTECT)

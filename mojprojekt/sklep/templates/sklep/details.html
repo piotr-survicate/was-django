@@ -9,11 +9,20 @@
     <li>
         <p>{{ product.description }}</p>
     </li>
+    <li>
+        <p>Autor: {{ product.author }}</p>
+    </li>
   </ul>
   <form action="/cart/add/" method="post">
       {% csrf_token %}
       <input type="hidden" name="item_id" value="{{product.id}}">
       <input type="submit" value="Dodaj do koszyka">
   </form>
+    {% for o in opinions %}
+    <li>
+        <h3>{ o.value }</h3>
+        <p>{{ o.message }}</p>
+    </li>
+    {% endfor %}
   <a href='/products'>Powrót</a>
 {% endblock %}
